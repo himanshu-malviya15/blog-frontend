@@ -35,7 +35,7 @@ export async function getBlogPosts(options: FetchOptions = {}) {
     const data = await fetchAPI(
       "/blog-posts?populate=*&sort=publishedAt:desc",
       {
-        revalidate: 60, // Revalidate every minute
+        revalidate: 60, 
         tags: ["blog-posts"],
         ...options,
       }
@@ -67,7 +67,7 @@ export async function getBlogPost(slug: string, options: FetchOptions = {}) {
 export async function getAllBlogSlugs() {
   try {
     const data = await fetchAPI("/blog-posts?fields=slug", {
-      revalidate: 3600, // Revalidate every hour for static paths
+      revalidate: 3600, 
       tags: ["blog-slugs"],
     });
     return data.data?.map((post: any) => post.slug) || [];

@@ -4,7 +4,6 @@ import DynamicZoneRenderer from "@/components/dynamic-zone-renderer"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
-import { generateBlogPostMetadata } from "@/lib/metadata"
 
 interface BlogPostPageProps {
   params: {
@@ -12,26 +11,12 @@ interface BlogPostPageProps {
   }
 }
 
-// Generate static params for known blog posts
 export async function generateStaticParams() {
   const slugs = await getAllBlogSlugs()
 
   return slugs.map((slug: string) => ({
     slug,
   }))
-}
-
-export async function generateMetadata({ params }: BlogPostPageProps) {
-  const post = await getBlogPost(params.slug)
-
-  if (!post) {
-    return {
-      title: "Post Not Found | My Blog",
-      description: "The requested blog post could not be found.",
-    }
-  }
-
-  return generateBlogPostMetadata(post)
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {

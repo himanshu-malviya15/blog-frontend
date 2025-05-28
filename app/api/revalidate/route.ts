@@ -4,7 +4,6 @@ import { type NextRequest, NextResponse } from "next/server"
 export async function POST(request: NextRequest) {
   const secret = request.nextUrl.searchParams.get("secret")
 
-  // Check for secret to confirm this is a valid request
   if (secret !== process.env.REVALIDATION_SECRET) {
     return NextResponse.json({ message: "Invalid secret" }, { status: 401 })
   }
@@ -14,7 +13,6 @@ export async function POST(request: NextRequest) {
     const { model, entry } = body
 
     if (model === "blog-post") {
-      // Revalidate specific blog post and the blog list
       revalidateTag("blog-posts")
       if (entry?.slug) {
         revalidateTag(`blog-post-${entry.slug}`)

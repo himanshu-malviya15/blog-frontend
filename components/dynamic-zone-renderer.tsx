@@ -2,7 +2,6 @@ import type {
   DynamicZoneComponent,
   RichTextComponent,
   QuoteComponent,
-  MediaComponent,
 } from "@/types/blog";
 import Image from "next/image";
 
